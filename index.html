@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Random Joke Generator</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+      <!-- <link rel="stylesheet" href="jokestyle.css"> -->
+      <style>
+         *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Caveat', cursive;
+         }
+         body{
+            background-color: orange;
+         }
+         .wrapper{
+            width: 80vmin;
+            padding: 50px 40px;
+            background-color: #15161a;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 5px;
+            box-shadow: 20px 20px 20px rgba(93, 67, 0, 0.4);
+         }
+         span{
+            display: block;
+            text-align: center;
+            font-size: 100px;
+         }
+         p{
+            font-size: 25px;
+            color: #ffffff;
+            font-weight: 400;
+            text-align: center;
+            word-wrap: break-word;
+            line-height: 35px;
+            margin: 30px;
+            opacity: 0;
+         }
+         .fade{
+            opacity: 1;
+            transition: opacity 1.5s;
+         }
+         button{
+            display: block;
+            background-color: orange;
+            border: none;
+            padding: 5px;
+            font-size: 25px;
+            color: black;
+            font-weight: 600;
+            padding: 12px 25px;
+            border-radius: 5px;
+            margin: 0 auto;
+            cursor: pointer;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="wrapper">
+         <span>&#128514;</span>
+         <p id="joke">hello world
+         </p>
+         <button id="btn">Generate Your Joke</button>
+      </div>
+      <script>
+         const jokeContainer=document.getElementById("joke");
+const btn = document.getElementById("btn");
+const url="https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,racist&type=single";
+let getjoke= ()=>{
+   jokeContainer.classList.remove("fade");
+   fetch(url)
+   .then(data=>data.json())
+   .then(item=>{
+      jokeContainer.textContent=`${item.joke}`;
+      jokeContainer.classList.add("fade");
+   });
+}
+btn.addEventListener("click",getjoke)
+getjoke();
+
+      </script>
+   </body>
+</html>
